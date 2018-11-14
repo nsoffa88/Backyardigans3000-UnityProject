@@ -21,6 +21,7 @@ public class PlayerAttack : MonoBehaviour {
 
     public void PerformAttack()
     {
+        //Attack Animations
         swordAnimator.SetTrigger("BaseAttack");
     }
 }

@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
+        //If any input happens, move character. Needed to prevent rotation reset upon no input
         if (h != 0 || v != 0)
         {
             Move(h, v);
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour {
         movement = movement.normalized * speed * Time.deltaTime;
 
         playerRigidBody.MovePosition(transform.position + movement);
+
+        //Player rotation in movement direction
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement.normalized), 0.15F);
     }
 }
