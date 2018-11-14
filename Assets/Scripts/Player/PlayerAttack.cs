@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
 
+    public GameObject sword;
+    private Animator swordAnimator;
+
+    private void Start()
+    {
+        swordAnimator = sword.GetComponent<Animator>();
+    }
+
     void Update () {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.JoystickButton2))
         {
             PerformAttack();
         }
@@ -13,6 +21,6 @@ public class PlayerAttack : MonoBehaviour {
 
     public void PerformAttack()
     {
-        Debug.Log("Attack");
+        swordAnimator.SetTrigger("BaseAttack");
     }
 }
