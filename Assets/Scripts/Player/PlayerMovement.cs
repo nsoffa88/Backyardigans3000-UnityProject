@@ -19,7 +19,11 @@ public class PlayerMovement : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        Move(h, v);
+        if (h != 0 || v != 0)
+        {
+            Move(h, v);
+        }
+
     }
 
     void Move(float h, float v)
@@ -29,5 +33,6 @@ public class PlayerMovement : MonoBehaviour {
         movement = movement.normalized * speed * Time.deltaTime;
 
         playerRigidBody.MovePosition(transform.position + movement);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement.normalized), 0.15F);
     }
 }
