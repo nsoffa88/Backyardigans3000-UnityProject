@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float speed = 10f;
+    public float speed;
+    public float jumpForceConst;
+
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
 
     Vector3 movement;
     Rigidbody playerRigidBody;
 
-    private void Awake()
+    void Awake()
     {
         playerRigidBody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -25,6 +29,25 @@ public class PlayerMovement : MonoBehaviour {
             Move(h, v);
         }
 
+        if (playerRigidBody.velocity.y < 0)
+        {
+            playerRigidBody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            Debug.Log("falling");
+        }
+        else if (playerRigidBody.velocity.y > 0 && !Input.GetButton("A"))
+        {
+            playerRigidBody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            Debug.Log("Short hop");
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("A"))
+        {
+            Jump();
+            //Debug.Log("Jump");
+        }
     }
 
     void Move(float h, float v)
@@ -37,5 +60,10 @@ public class PlayerMovement : MonoBehaviour {
 
         //Player rotation in movement direction
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement.normalized), 0.15F);
+    }
+
+    void Jump()
+    {
+        playerRigidBody.velocity = Vector3.up * jumpForceConst;
     }
 }
