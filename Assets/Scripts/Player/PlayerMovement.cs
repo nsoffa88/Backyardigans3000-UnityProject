@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed;
-    public float jumpForceConst;
+    Vector3 movement;
 
+    public float jumpForceConst;
     public float fallMultiplier;
     public float lowJumpMultiplier;
+    public int jumpsLeft;
 
-    Vector3 movement;
     Rigidbody playerRigidBody;
 
     void Awake()
@@ -32,21 +33,18 @@ public class PlayerMovement : MonoBehaviour {
         if (playerRigidBody.velocity.y < 0)
         {
             playerRigidBody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-            Debug.Log("falling");
         }
         else if (playerRigidBody.velocity.y > 0 && !Input.GetButton("A"))
         {
             playerRigidBody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-            Debug.Log("Short hop");
         }
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("A"))
+        if (Input.GetButtonDown("A") && jumpsLeft > 0)
         {
             Jump();
-            //Debug.Log("Jump");
         }
     }
 
@@ -65,5 +63,7 @@ public class PlayerMovement : MonoBehaviour {
     void Jump()
     {
         playerRigidBody.velocity = Vector3.up * jumpForceConst;
+        jumpsLeft--;
+        Debug.Log("Jumps Left: " + jumpsLeft);
     }
 }
