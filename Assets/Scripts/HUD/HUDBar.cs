@@ -10,6 +10,8 @@ public class HUDBar : MonoBehaviour
     public Image content;
     public PlayerHealth health;
 
+    private float lerpSpeed = 5;
+
     // Update is called once per frame
     void Update() {
         HandleBar();
@@ -17,7 +19,7 @@ public class HUDBar : MonoBehaviour
 
     private void HandleBar() {
         if (fillAmount != content.fillAmount) {
-            content.fillAmount = fillAmount;
+            content.fillAmount = Mathf.Lerp(content.fillAmount, fillAmount, Time.deltaTime * lerpSpeed);
         }
     }
 
