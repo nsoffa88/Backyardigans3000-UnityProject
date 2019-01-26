@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour {
         var health = hit.GetComponent<PlayerHealth>();
         if (health != null)
         {
-            health.TakeDamage(50);
+            health.TakeDamage(30);
             hit.transform.position = new Vector3(0, 1, 0);
         }
         if (health.currentHealth <= 0)
