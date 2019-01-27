@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour {
     public float lowJumpMultiplier;
     public int jumpsLeft;
 
+    public float dashDistance = 30f;
+    public bool dashReady = true;
+
     Rigidbody playerRigidBody;
 
     void Awake()
@@ -37,6 +40,10 @@ public class PlayerMovement : MonoBehaviour {
         else if (playerRigidBody.velocity.y > 0 && !Input.GetButton("A"))
         {
             playerRigidBody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+
+        if(Input.GetButtonDown("B") && dashReady) {
+            Dash(h, v);
         }
     }
 
@@ -65,5 +72,9 @@ public class PlayerMovement : MonoBehaviour {
         playerRigidBody.velocity = Vector3.up * jumpForceConst;
         jumpsLeft--;
         Debug.Log("Jumps Left: " + jumpsLeft);
+    }
+
+    void Dash(float h, float v) {
+        playerRigidBody.MovePosition(transform.position + (movement * dashDistance));
     }
 }
