@@ -13,12 +13,10 @@ public class PlayerHealth : MonoBehaviour {
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float amount)
-    {
+    public void TakeDamage(float amount) {
         currentHealth -= amount;
         healthBar.UpdateFillAmount();
-        if (currentHealth <= 0)
-        {
+        if (currentHealth <= 0) {
             currentHealth = 0;
             Debug.Log("Dead!");
         }

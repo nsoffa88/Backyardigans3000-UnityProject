@@ -80,8 +80,8 @@ public class PlayerMovement : MonoBehaviour {
         playerRigidBody.MovePosition(transform.position + (movement * dashDistance));
     }
 
-    public void KnockBack(Vector3 direction, float EnemyKnockBackForce, float EnemyKnockBackTimer) {
-        knockBackCounter = EnemyKnockBackTimer;
+    public void KnockBack(Vector3 direction, float EnemyKnockBackForce, float EnemyKnockBackTime) {
+        knockBackCounter = EnemyKnockBackTime;
 
         movement = (direction * EnemyKnockBackForce);
         movement.y = 2f;
