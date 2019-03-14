@@ -61,11 +61,11 @@ public class PlayerAttack : MonoBehaviour {
         if (usedComboCount <= 2) {
             attackDamage = 10;
             knockbackForce = 2f;
-            knockbackTime = 0.25f;
+            knockbackTime = 3f;
         } else {
             attackDamage = 30;
             knockbackForce = 8f;
-            knockbackTime = 1f;
+            knockbackTime = 4f;
         }
 
         EnemyHealth enemyHealth = collider.gameObject.GetComponent<EnemyHealth>();

@@ -7,21 +7,21 @@ public class PlayerMovement : MonoBehaviour {
     Rigidbody playerRigidBody;
 
     //Movement
-    public float speed;
+    float speed = 10f;
     Vector3 movement;
 
     //Jump
-    public float jumpForceConst;
-    public float fallMultiplier;
-    public float lowJumpMultiplier;
-    public int jumpsLeft;
+    float jumpForceConst = 8f;
+    float fallMultiplier = 2.5f;
+    float lowJumpMultiplier = 2f;
+    public int jumpsLeft = 2;
 
     //Dash
-    public float dashDistance = 30f;
-    public bool dashReady = true;
+    float dashDistance = 30f;
+    bool dashReady = true;
 
     //Knockback
-    public float knockBackCounter;
+    float knockBackCounter;
 
     void Awake()
     {

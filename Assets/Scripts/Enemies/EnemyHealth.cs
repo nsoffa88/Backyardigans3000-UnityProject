@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
     public void KnockBack(Vector3 direction, float PlayerKnockBackForce, float PlayerKnockBackTime) {
-        knockBackCounter = PlayerKnockBackTime;
+        knockBackCounter = Time.time + PlayerKnockBackTime;
 
         Vector3 knockback = (direction * PlayerKnockBackForce);
         knockback.y = 2f;
